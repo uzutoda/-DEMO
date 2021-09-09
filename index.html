@@ -1,0 +1,117 @@
+<link rel="stylesheet" href="style.css">
+<body id = "top">
+    <section class="single">
+        <h2 class = "fullscreen">Slide Animation DEMO</h2>
+        <div class="single-item slidefromleft js-animation">
+        </div>
+        <div class="single-item slidefromright js-animation">
+        </div>
+        <div class="single-item slidefromleft js-animation">
+        </div>
+        <div class="single-item slidefromright js-animation">
+        </div>
+        <div class="single-item slidefromleft js-animation">
+        </div>
+        <div class="single-item slidefromright js-animation">
+        </div>
+        <div id = "btnToTop" class = "btnToTop">TOPへ戻る</div>
+
+    </section>
+<script>
+
+    let timer;
+    document.addEventListener("scroll",()=>{
+        clearTimeout(timer);
+        timer = setTimeout(function () {
+            elements = Array.from(document.getElementsByClassName('js-animation'));
+            elements.map((element,index)=>{
+                console.log(window.innerHeight)
+                if(window.scrollY>=element.offsetTop-(window.innerHeight/1.5)){
+                    element.classList.add('is-animated');
+                }else{
+                    element.classList.remove('is-animated');
+                }
+            })
+
+            //TOPへ戻るボタンの処理
+            if(window.scrollY>800){btnToTop.classList.add('is-animated')}else if(btnToTop.classList.contains('is-animated')){btnToTop.classList.remove('is-animated')}
+        }, 16);
+
+    })
+
+    btnToTop.addEventListener("click",()=>{
+        window.location.href = '#top'
+    })
+
+</script>
+</body>
+
+<style>
+
+    *{
+      margin:0;
+      padding:0;
+      box-sizing: border-box;
+    }
+
+    .fullscreen{
+      text-align: center;
+      line-height: 100vh;
+      width:100vw;
+      height:100vh;
+    }
+
+    .single{
+      display:flex;
+      flex-flow:column;
+      align-items: center;
+      overflow: hidden;
+    }
+    .single-item{
+      background-color: rgb(175, 175, 175);
+      width:100%;
+      height:100vh;
+    }
+
+    .slidefromleft{
+      opacity: 0;
+      transform:translateX(-100vw);
+      transition: 1s ease;
+    }
+
+    .slidefromright{
+      opacity: 0;
+      transform:translateX(100vw);
+      transition: 1s ease;
+    }
+
+    .slidefromleft.is-animated,.slidefromright.is-animated{
+      opacity: 1;
+      transform:translateX(0);
+    }
+
+    .btnToTop{
+      color:rgb(247, 247, 247);
+      position:fixed;
+      background-color: rgba(49, 49, 71);
+      bottom:100px;
+      right:50px;
+      width:128px;
+      height:48px;
+      text-align: center;
+      line-height: 48px;
+      border-radius:5px;
+      opacity:0;
+      transition:0.5s;
+    }
+
+    .btnToTop.is-animated:hover{
+      opacity:0.6;
+      cursor:pointer;
+    }
+
+    .btnToTop.is-animated{
+      opacity:0.8;
+    }
+
+    </style>
