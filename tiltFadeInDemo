@@ -1,0 +1,114 @@
+<link rel="stylesheet" href="style.css">
+<script src="https://kit.fontawesome.com/4ca546b75c.js" crossorigin="anonymous"></script>
+
+<body id = "top">
+    <section class="single">
+        <div id = "fullScreen" class = "fullscreen">
+            <h2 class = "elements">斜めフェードインDEMO</h2>
+            <button id = "btnFadeIn" class = "btn-menu"></button>
+        </div>
+    </section>
+</body>
+
+<script>
+    const element = document.getElementById("btnFadeIn");
+    element.addEventListener("click",()=>{
+        if(!fullScreen.classList.contains("is-animated")){
+        fullScreen.classList.add("is-animated")
+        }else{
+        fullScreen.classList.remove("is-animated")
+        }
+    })
+
+</script>
+
+<style>
+
+*{
+  margin:0;
+  padding:0;
+  box-sizing: border-box;
+}
+
+.fullscreen{
+  position:relative;
+  display:flex;
+  flex-flow:column;
+  justify-content: center;
+  align-items:center;
+  width:100vw;
+  height:100vh;
+  transition:transform 1s;
+  color:rgb(32, 32, 32);
+}
+
+.fullscreen.is-animated{
+    color:white;
+}
+
+.fullscreen:before{
+  z-index: -1;
+  position:absolute;
+  content:"";
+  background-color: gray;
+  width:150vw;
+  height:1vh;
+  transform: rotate(-45deg);
+  opacity:0;
+  transition:1s;
+}
+
+.fullscreen.is-animated:before{
+  position:absolute;
+  content:"";
+
+  background-color: gray;
+  transform: rotate(-45deg) scaleY(220);
+  opacity:1;
+}
+
+
+.fullscreen.elements{
+    display:block;
+    position:absolute;
+}
+
+.single{
+  display:flex;
+  flex-flow:column;
+  align-items: center;
+  overflow: hidden;
+}
+.single-item{
+  background-color: blue;
+  width:100%;
+  height:100vh;
+}
+
+.btn-menu{
+    font-family: "Font Awesome 5 Free";
+    font-weight: 900;
+    position:absolute;
+    top:120px;
+    right:120px;
+    background-color: transparent;
+    color:black;
+    border:none;
+    cursor:pointer;
+}
+
+.fullscreen .btn-menu::before{
+    display:block;
+    content: "\f0c9";
+    font-size:48px;
+    color:rgb(80, 80, 80);
+    transition:transform 1s,color 1s;
+}
+
+.fullscreen.is-animated .btn-menu::before{
+    content: "\f00d";
+    color:rgb(255, 255, 255);
+    transform:rotate(180deg);
+}
+
+</style>
